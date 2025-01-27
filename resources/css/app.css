@@ -5,3 +5,30 @@
 [x-cloak] {
     display: none;
 }
+
+@layer components{
+    .containeer{
+        max-width: 80rem;
+        margin-right: auto;
+        margin-left: auto;
+        /* background-color: red; */
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+}
+
+@media(min-width:640px){
+    .containeer{
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media(min-width:1024px){
+    .containeer{
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
