@@ -21,7 +21,7 @@
                         </div>
 
                         <h2 class="text-4xl text-white leading-8 font-bold">
-                            <a href="">
+                            <a class="hover:underline" href="{{route('posts.show', $post)}}">
                                 {{$post->name}}
                             </a>
                         </h2>
