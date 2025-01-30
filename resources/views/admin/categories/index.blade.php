@@ -3,7 +3,7 @@
 @section('title', 'LunaDev')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Categorías</h1>
 @stop
 
 @section('content')
