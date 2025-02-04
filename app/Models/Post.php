@@ -9,6 +9,13 @@ class Post extends Model
 {
 
     use HasFactory;
+
+    // Slug en el id
+    public function getRouteKeyName()
+    {
+        return "slug";
+    }
+
     //Relacion uno a muchos inversa
     public function user(){
         return $this->belongsTo(User::class);
