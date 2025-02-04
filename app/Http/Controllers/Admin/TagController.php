@@ -13,7 +13,10 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('admin.tags.index');
+
+        $tags = Tag::all();
+
+        return view('admin.tags.index',compact('tags'));
     }
 
     /**
@@ -29,7 +32,15 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:tags',
+            'color' => 'required'
+        ]);
+
+        $tag = Tag::create($request->all());
+
+        return redirect()->route('admin.tags.edit',$tag)->with("correcto", "La etiqueta fue creada con éxito :)");
     }
 
     /**
@@ -53,7 +64,17 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:tags',
+            'color' => 'required'
+        ]);
+
+        $tag->update($request->all());
+
+        return redirect()->route('admin.tags.edit',$tag)->with("correcto", "La etiqueta fue editada con éxito :)");
+
+
     }
 
     /**
@@ -61,6 +82,8 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+
+        return redirect()->route('admin.tags.index')->with("correcto","La etiqueta fue eliminada con éxito");
     }
 }
