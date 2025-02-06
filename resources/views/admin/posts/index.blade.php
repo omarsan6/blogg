@@ -3,7 +3,12 @@
 @section('title', 'LunaDev')
 
 @section('content_header')
-    <h1>Posts</h1>
+    <div class="d-flex w-100">
+
+        <h1 class="mr-3">Posts</h1>
+    
+        <a class="btn btn-success" href="{{route('admin.posts.create')}}">Nuevo</a>
+    </div>
 @stop
 
 @section('content')
