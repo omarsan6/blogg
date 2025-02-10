@@ -11,7 +11,12 @@
     <div class="card">
         <div class="card-body">
 
-            <form action="{{route('admin.posts.store')}}">
+            <form action="{{route('admin.posts.store')}}" method="POST">
+
+                @csrf
+
+                <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+
                 {{-- nombre --}}
                 <div class="form-group">
                     <label for="name">Nombre</label>
@@ -21,6 +26,12 @@
                         id="name"
                         class="form-control" 
                         placeholder="Nombre del post">
+
+                    @error('name')
+                        <p class="text-danger">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
 
                 {{-- slug --}}
@@ -32,6 +43,12 @@
                         id="slug"
                         class="form-control"
                         readonly>
+
+                    @error('slug')
+                        <p class="text-danger">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
 
                 {{-- categorias --}}
@@ -64,6 +81,12 @@
                         <input class="" type="radio" name="status" id="status" value="2">
                         <span class="font-weight-normal">Publicado</span>
                     </label>
+
+                    @error('status')
+                        <p class="text-danger">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
 
                 {{-- tags --}}
@@ -90,22 +113,41 @@
                                     <input class="" name="tags[]" type="checkbox" value="{{$tag->id}}">
                                     <span class="font-weight-normal">#{{$tag->name}}</span>
                                 </label>
-            
                                 @endforeach
+
+                                @error('tags')
+                                    <p class="text-danger">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
                             </div>
                           </div>
                         </div>
                       </div>
                 </div>
 
+                {{-- extract --}}
                 <div class="form-group">
                     <label for="extract">Extracto del post</label>
                     <textarea name="extract" class="form-control" id="extract" cols="10" rows="10"></textarea>
+
+                    @error('extract')
+                        <p class="text-danger">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
                 
+                {{-- body --}}
                 <div class="form-group">
                     <label for="body">Cuerpo del post</label>
                     <textarea name="body" class="form-control" id="body" cols="10" rows="10"></textarea>
+
+                    @error('body')
+                        <p class="text-danger">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
 
                 <input type="submit" class="btn btn-primary" value="Crear post">
