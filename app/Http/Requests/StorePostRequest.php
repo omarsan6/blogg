@@ -30,7 +30,8 @@ class StorePostRequest extends FormRequest
         $rules = [
           'name' => 'required',  
           'slug' => 'required|unique:posts',  
-          'status' => 'required|in:1,2',  
+          'status' => 'required|in:1,2', 
+          'file' => 'image' 
         ];
 
         // si el estatus es 2=publicado tiene que validar los demas campos

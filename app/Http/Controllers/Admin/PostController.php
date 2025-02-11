@@ -8,6 +8,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
@@ -37,7 +39,21 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+
+        // crea un nuevo post
         $post = Post::create($request->all());
+
+        // Si se está enviando una imagen desde el formulario
+        if($request->file('file')){
+            // mover el archivo de la carpeta temporal a la carperta storage/app/public/posts
+           $url = Storage::put('posts',$request->file('file'));
+
+            // al subir la url de la imagen a traves de relaciones el campo imagebale_id e
+            // imageable_type son llenados por el id del $post y el modelo automaticamente
+           $post->image()->create([
+                'url' => $url,
+           ]);
+        }
 
         // almacenar los tags en la tabla muchos a muchos
         // si tiene tags en el objeto request, almacenarlos
