@@ -2,13 +2,25 @@
 
 namespace App\Models;
 
+use App\Observers\PostObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
+#[ObservedBy([PostObserver::class])]
 class Post extends Model
 {
 
     use HasFactory;
+
+    protected $guarded=['id','created_at','updated_at'];
+
+    // Slug en el id
+    public function getRouteKeyName()
+    {
+        return "slug";
+    }
+
     //Relacion uno a muchos inversa
     public function user(){
         return $this->belongsTo(User::class);

@@ -3,11 +3,24 @@
 @section('title', 'LunaDev')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <div class="d-flex w-100">
+
+        <h1 class="mr-3">Posts</h1>
+    
+        <a class="btn btn-success" href="{{route('admin.posts.create')}}">Nuevo</a>
+    </div>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+
+    @if (session("correcto"))
+    <div class="alert alert-success" role="alert">
+        {{session("correcto")}}
+    </div>
+    @endif
+    
+    @livewire('admin.posts-index')
+
 @stop
 
 @section('css')
