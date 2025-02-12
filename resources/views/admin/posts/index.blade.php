@@ -12,6 +12,12 @@
 @stop
 
 @section('content')
+
+    @if (session("correcto"))
+    <div class="alert alert-success" role="alert">
+        {{session("correcto")}}
+    </div>
+    @endif
     
     @livewire('admin.posts-index')
 

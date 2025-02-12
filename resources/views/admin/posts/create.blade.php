@@ -293,6 +293,7 @@
             } );
     </script>
 
+    {{-- mostrar la foto --}}
     <script>
         document.getElementById("file").addEventListener('change', cambiarImagen);
 
