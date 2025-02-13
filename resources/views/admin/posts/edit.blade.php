@@ -7,208 +7,212 @@
 @stop
 
 @section('content')
+    {{-- primero valida que el usuario del post sea el mismo que el usuario que está logeado --}}
+    @can('author', $post)
+        @if (session("correcto"))
+        <div class="alert alert-success" role="alert">
+            {{session("correcto")}}
+        </div>
+        @endif
 
-@if (session("correcto"))
-    <div class="alert alert-success" role="alert">
-        {{session("correcto")}}
-    </div>
-@endif
+        <div class="card">
+            <div class="card-body">
 
-<div class="card">
-    <div class="card-body">
+                <form action="{{route('admin.posts.update',$post)}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
-        <form action="{{route('admin.posts.update',$post)}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
+                    {{-- nombre --}}
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input 
+                            type="text" 
+                            name="name" 
+                            id="name"
+                            class="form-control" 
+                            placeholder="Nombre del post"
+                            value="{{$post->name}}">
 
-            {{-- nombre --}}
-            <div class="form-group">
-                <label for="name">Nombre</label>
-                <input 
-                    type="text" 
-                    name="name" 
-                    id="name"
-                    class="form-control" 
-                    placeholder="Nombre del post"
-                    value="{{$post->name}}">
-
-                @error('name')
-                    <p class="text-danger">
-                        {{ $message }}
-                    </p>
-                @enderror
-            </div>
-
-            {{-- slug --}}
-            <div class="form-group">
-                <label for="slug">Slug</label>
-                <input 
-                    type="text"
-                    name="slug"
-                    id="slug"
-                    class="form-control"
-                    value="{{$post->slug}}"
-                    readonly>
-
-                @error('slug')
-                    <p class="text-danger">
-                        {{ $message }}
-                    </p>
-                @enderror
-            </div>
-
-            {{-- categorias --}}
-            <div class="form-group">
-                <label for="category_id">Categorías</label>
-
-                <select name="category_id" id="category_id" class="form-control">
-
-                    @foreach ($categories as $category)  
-                        <option value="{{$category->id}}" @if ($post->category_id == $category->id)
-                            selected
-                        @endif>{{$category->name}}</option>
-                    @endforeach
-                   
-                </select>
-
-                @error('category_id')
-                    <p class="text-danger">
-                        {{ $message }}
-                    </p>
-                @enderror
-            </div>
-
-            {{-- estado --}}
-            <div class="form-group">
-                <p class="font-weight-bold">Estado</p>
-                <label class="mr-2">
-                    <input class="" type="radio" name="status" id="status" value="1" @if ($post->status == 1)
-                        checked
-                    @endif >
-                    <span class="font-weight-normal">Borrador</span>
-                </label>
-                <label>
-                    <input class="" type="radio" name="status" id="status" value="2" @if ($post->status == 2)
-                    checked
-                @endif>
-                    <span class="font-weight-normal">Publicado</span>
-                </label>
-
-                @error('status')
-                    <p class="text-danger">
-                        {{ $message }}
-                    </p>
-                @enderror
-            </div>
-
-            {{-- tags --}}
-            <div id="accordion">
-
-                <div class="card">
-                    <div class="card-header" id="headingTwo">
-                      <h5 class="mb-0">
-                        <button type="button" class="btn collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                          <strong>Etiquetas</strong>
-                          <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" width="14" height="14" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
-                          </svg>
-                          
-                        </button>
-                      </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                      <div class="card-body">
-                        <div class="form-group">
-                            @foreach ($tags as $tag)
-                            <label class="mr-5">
-                                <input class="" name="tags[]" type="checkbox" value="{{$tag->id}}"
-                                {{ $post->tags->contains($tag->id) ? 'checked' : '' }}>
-                                <span class="font-weight-normal">#{{$tag->name}}</span>
-                            </label>
-                            @endforeach
-
-                           
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
-                @error('tags')
-                    <p class="text-danger">
-                        {{ $message }}
-                    </p>
-                @enderror
-            </div>
-
-            {{-- img --}}
-            <div class="row my-5">
-
-                <div class="col">
-                    <div class="image-wrapper">
-                        @if($post->image)
-                            <img id="picture" src="{{Storage::url($post->image->url)}}" alt="">
-                        @else
-                            <img src="https://cdn.pixabay.com/photo/2022/05/03/23/12/animal-7172825_1280.png" alt="">
-                        @endif
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="form-group m-3">
-                        <label for="file" class="mb-3">Imagen que se mostrará en el post</label>
-                        <input type="file" name="file" id="file" class="form-control-file" accept="image/*">
-                        <p class="mt-3">
-                            En caso de que decidas no agregar imagen, 
-                            por defecto el sistema agregará la imagen del capibara.
-                        </p>
-
-                        @error('file')
-                        <p class="text-danger">
-                            {{ $message }}
-                        </p>
+                        @error('name')
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
                         @enderror
                     </div>
 
+                    {{-- slug --}}
+                    <div class="form-group">
+                        <label for="slug">Slug</label>
+                        <input 
+                            type="text"
+                            name="slug"
+                            id="slug"
+                            class="form-control"
+                            value="{{$post->slug}}"
+                            readonly>
+
+                        @error('slug')
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    {{-- categorias --}}
+                    <div class="form-group">
+                        <label for="category_id">Categorías</label>
+
+                        <select name="category_id" id="category_id" class="form-control">
+
+                            @foreach ($categories as $category)  
+                                <option value="{{$category->id}}" @if ($post->category_id == $category->id)
+                                    selected
+                                @endif>{{$category->name}}</option>
+                            @endforeach
+                        
+                        </select>
+
+                        @error('category_id')
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    {{-- estado --}}
+                    <div class="form-group">
+                        <p class="font-weight-bold">Estado</p>
+                        <label class="mr-2">
+                            <input class="" type="radio" name="status" id="status" value="1" @if ($post->status == 1)
+                                checked
+                            @endif >
+                            <span class="font-weight-normal">Borrador</span>
+                        </label>
+                        <label>
+                            <input class="" type="radio" name="status" id="status" value="2" @if ($post->status == 2)
+                            checked
+                        @endif>
+                            <span class="font-weight-normal">Publicado</span>
+                        </label>
+
+                        @error('status')
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    {{-- tags --}}
+                    <div id="accordion">
+
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button type="button" class="btn collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <strong>Etiquetas</strong>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" width="14" height="14" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                                </svg>
+                                
+                                </button>
+                            </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    @foreach ($tags as $tag)
+                                    <label class="mr-5">
+                                        <input class="" name="tags[]" type="checkbox" value="{{$tag->id}}"
+                                        {{ $post->tags->contains($tag->id) ? 'checked' : '' }}>
+                                        <span class="font-weight-normal">#{{$tag->name}}</span>
+                                    </label>
+                                    @endforeach
+
+                                
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        @error('tags')
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    {{-- img --}}
+                    <div class="row my-5">
+
+                        <div class="col">
+                            <div class="image-wrapper">
+                                @if($post->image)
+                                    <img id="picture" src="{{Storage::url($post->image->url)}}" alt="">
+                                @else
+                                    <img src="https://cdn.pixabay.com/photo/2022/05/03/23/12/animal-7172825_1280.png" alt="">
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group m-3">
+                                <label for="file" class="mb-3">Imagen que se mostrará en el post</label>
+                                <input type="file" name="file" id="file" class="form-control-file" accept="image/*">
+                                <p class="mt-3">
+                                    En caso de que decidas no agregar imagen, 
+                                    por defecto el sistema agregará la imagen del capibara.
+                                </p>
+
+                                @error('file')
+                                <p class="text-danger">
+                                    {{ $message }}
+                                </p>
+                                @enderror
+                            </div>
+
+                            
+
+                        </div>
+                    </div>
+
+                    {{-- extract --}}
+                    <div class="form-group">
+                        <label for="extract">Extracto del post</label>
+                        <textarea name="extract" class="form-control" id="extract" cols="10" rows="10">
+                            {{$post->extract}}
+                        </textarea>
+
+                        @error('extract')
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
                     
+                    {{-- body --}}
+                    <div class="form-group">
+                        <label for="body">Cuerpo del post</label>
+                        <textarea name="body" class="form-control" id="body" cols="10" rows="10">
+                            {{$post->body}}
+                        </textarea>
 
-                </div>
+                        @error('body')
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Editar post">
+
+
+                </form>
+
             </div>
-
-            {{-- extract --}}
-            <div class="form-group">
-                <label for="extract">Extracto del post</label>
-                <textarea name="extract" class="form-control" id="extract" cols="10" rows="10">
-                    {{$post->extract}}
-                </textarea>
-
-                @error('extract')
-                    <p class="text-danger">
-                        {{ $message }}
-                    </p>
-                @enderror
-            </div>
-            
-            {{-- body --}}
-            <div class="form-group">
-                <label for="body">Cuerpo del post</label>
-                <textarea name="body" class="form-control" id="body" cols="10" rows="10">
-                    {{$post->body}}
-                </textarea>
-
-                @error('body')
-                    <p class="text-danger">
-                        {{ $message }}
-                    </p>
-                @enderror
-            </div>
-
-            <input type="submit" class="btn btn-primary" value="Editar post">
-
-
-        </form>
-
-    </div>
-</div>
+        </div>
+    @else
+        <p>No tiene permisos :(</p>
+    @endcan
 @stop
 
 @section('css')

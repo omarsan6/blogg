@@ -39,7 +39,6 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-
         // crea un nuevo post
         $post = Post::create($request->all());
 
@@ -77,7 +76,6 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-
         $categories = Category::all();
 
         $tags = Tag::all();
