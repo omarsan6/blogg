@@ -18,8 +18,8 @@ class UserSeeder extends Seeder
             'name' => 'Omar Sánchez Santana',
             'email' => 'omarcore8@gmail.com',
             'password' => bcrypt('12345678')
-        ]);
+        ])->assignRole('Admin');
 
-        User::factory(9)->create();
+        User::factory(30)->create();
     }
 }
