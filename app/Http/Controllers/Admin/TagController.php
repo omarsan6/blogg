@@ -44,14 +44,6 @@ class TagController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Tag $tag)
-    {
-        return view('admin.tags.show',compact('tag'));
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Tag $tag)

@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+
     public function index()
     {
         return view('admin.users.index');
@@ -27,7 +28,5 @@ class UserController extends Controller
         $user->roles()->sync($request->roles);
 
         return redirect()->route('admin.users.edit',$user)->with('correcto','Roles asigandos correctamente :)');
-
-
     }
 }
