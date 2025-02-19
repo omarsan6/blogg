@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\Middleware;
 
 class CategoryController extends Controller
 {
@@ -40,14 +41,6 @@ class CategoryController extends Controller
         $category = Category::create($request->all());
 
         return redirect()->route('admin.categories.edit',$category)->with('correcto','Categoría creada correctamente :)');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        return view('admin.categories.show', compact('category'));
     }
 
     /**
