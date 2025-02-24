@@ -20,7 +20,7 @@ class RolSeeder extends Seeder
         // Dashboard
         Permission::create(['name' => 'admin.home'])->syncRoles([$role1,$role2]);
 
-        // Categorias
+        // Usuarios
         Permission::create(['name' => 'admin.users.index'])->syncRoles([$role1]);
         Permission::create(['name' => 'admin.users.update'])->syncRoles([$role1]);
         Permission::create(['name' => 'admin.users.edit'])->syncRoles([$role1]);
