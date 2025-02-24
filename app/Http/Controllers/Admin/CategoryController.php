@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Routing\Controllers\Middleware;
 
 class CategoryController extends Controller
@@ -25,6 +26,11 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        // validar permisos
+        if (! Gate::allows('admin.categories.create')) {
+            abort(403,"No autorizado");
+        }
+
         return view('admin.categories.create');
     }
 
@@ -48,6 +54,11 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        // validar permisos
+        if (! Gate::allows('admin.categories.edit')) {
+            abort(403,"No autorizado");
+        }
+        
         return view('admin.categories.edit', compact('category'));
     }
 
