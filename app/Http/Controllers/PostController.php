@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Post;
 use App\Models\Tag;
+use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -17,6 +18,10 @@ class PostController extends Controller
     }
 
     public function show(Post $post){
+
+        if (!Gate::allows('published', $post)) {
+            abort(403,"No tiene acceso");
+        }
 
         $similares = Post::where('category_id', $post->category_id)
                                 ->where('status',2)
