@@ -6,14 +6,17 @@ use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
+
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
-
-use App\Http\Requests\PostRequest;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class PostController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -68,11 +71,17 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+
+        if (!Gate::allows('author', $post)) {
+            abort(403,"No tiene acceso");
+        }
+
         $categories = Category::all();
-
+    
         $tags = Tag::all();
-
+    
         return view('admin.posts.edit',compact('post','categories','tags'));
+
     }
 
     /**
@@ -80,6 +89,11 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
+
+        if (!Gate::allows('author', $post)) {
+            abort(403,"No tiene acceso");
+        }
+
         // Edita los atributos posts
         $post->update($request->all());
 
@@ -124,6 +138,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+
+        if (!Gate::allows('author', $post)) {
+            abort(403,"No tiene acceso");
+        }
+
         $post->delete();
 
         return redirect()->route('admin.posts.index')->with('correcto','El post se eliminó con éxito :(');

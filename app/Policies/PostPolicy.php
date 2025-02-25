@@ -4,16 +4,10 @@ namespace App\Policies;
 
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Auth\Access\Response;
 
 class PostPolicy
 {
-    /**
-     * Create a new policy instance.
-     */
-    public function __construct()
-    {
-        //
-    }
 
     // si el usuario logeado es el mismo que el usuario del post, puede editar
     public function author(User $user, Post $post){
