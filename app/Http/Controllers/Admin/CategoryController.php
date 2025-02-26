@@ -26,10 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        // validar permisos
-        if (! Gate::allows('admin.categories.create')) {
-            abort(403,"No autorizado");
-        }
+        
 
         return view('admin.categories.create');
     }
