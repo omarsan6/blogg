@@ -17,7 +17,7 @@ Route::middleware(['role:Admin'])->group(function(){
                 ->names('admin.users');
 });
 
-
+/* CATEGORY */
 Route::middleware(['auth'])->group(function () {
         // crea la ruta para index y que los usuarios con rol de Blogger y Admin puedan acceder
         Route::resource('categories', CategoryController::class)
@@ -30,11 +30,23 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
         Route::resource('categories', CategoryController::class)
                 ->only(['create','store','edit','update','destroy']) //crea todos menos show e index
                 ->names('admin.categories');
-});        
+});   
 
+/* TAGS */
+// los usuarios autenticados sin importar el rol pueden ver la ruta index generada
+Route::middleware(['auth'])->group(function (){
+        Route::resource('tags', TagController::class)
+                ->except(['create', 'store', 'edit', 'update', 'destroy','show']) //genera solo index
+                ->names('admin.tags');
+});
 
-Route::resource('tags', TagController::class) 
-        ->names('admin.tags');
+//los usuarios con rol de Admin pueden acceder a estas rutas
+Route::middleware(['auth','role:Admin'])->group(function (){
+        Route::resource('tags', TagController::class)
+                ->only(['create','store','edit','update','destroy']) //crea todos menos show e index
+                ->names('admin.tags');
+});
+
 
 Route::resource('posts', PostController::class)
         ->names('admin.posts');
