@@ -7,6 +7,13 @@
 @stop
 
 @section('content')
+
+@if (session("correcto"))
+<div class="alert alert-success" role="alert">
+    {{session("correcto")}}
+</div>
+@endif
+
     <p>Welcome to this beautiful admin panel.</p>
 @stop
 

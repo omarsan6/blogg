@@ -10,7 +10,8 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{route('admin.roles.store')}}">
+            <form action="{{route('admin.roles.store')}}" method="POST">
+                @csrf
             
                 {{-- name --}}
                 <div class="form-group">
@@ -24,6 +25,12 @@
                         id="name"
                         class="form-control"
                         placeholder="Ej: Administrador">
+
+                    @error('name')
+                        <p class="text-danger">
+                            {{ $message }}
+                        </p>
+                    @enderror
 
                 </div>
 
