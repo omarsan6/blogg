@@ -333,6 +333,11 @@ return [
             'can' => 'admin.users.index'
         ],
         [
+            'text' => 'Roles',
+            'route' => 'admin.roles.index',
+            'icon' => 'fas fa-fw fa-users-cog',
+        ],
+        [
             'text' => 'Categorías',
             'route' => 'admin.categories.index',
             'icon' => 'fab fa-fw fa-buffer',
