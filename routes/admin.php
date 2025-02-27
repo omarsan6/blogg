@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,8 @@ Route::middleware(['role:Admin'])->group(function(){
                 ->only(['index','edit','update']) //crea solo las rutas index, edit y update
                 ->names('admin.users');
 });
+
+Route::resource('roles',RoleController::class)->names('admin.roles');
 
 /* CATEGORY */
 Route::middleware(['auth'])->group(function () {
