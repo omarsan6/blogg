@@ -11,6 +11,12 @@
 @stop
 
 @section('content')
+
+@if (session("correcto"))
+<div class="alert alert-success" role="alert">
+    {{session("correcto")}}
+</div>
+@endif
     
     <div class="card">
         <div class="card-body">
