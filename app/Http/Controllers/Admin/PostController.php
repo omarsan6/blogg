@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Cache;
 
 class PostController extends Controller
 {
@@ -56,6 +57,9 @@ class PostController extends Controller
                 'url' => $url,
            ]);
         }
+
+        // eliminar todos los valores de caché
+        Cache::flush();
 
         // almacenar los tags en la tabla muchos a muchos
         // si tiene tags en el objeto request, almacenarlos
@@ -129,6 +133,9 @@ class PostController extends Controller
 
         }
 
+        // eliminar todos los valores de caché
+        Cache::flush();
+
         return redirect()->route('admin.posts.edit',$post)->with('correcto','El post se actualizó con éxito :)');
 
     }
@@ -144,6 +151,9 @@ class PostController extends Controller
         }
 
         $post->delete();
+
+        // eliminar todos los valores de caché
+        Cache::flush();
 
         return redirect()->route('admin.posts.index')->with('correcto','El post se eliminó con éxito :(');
 
