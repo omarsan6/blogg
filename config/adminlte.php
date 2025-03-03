@@ -361,7 +361,7 @@ return [
             'text' => 'Nuevo Post',
             'route' => 'admin.posts.create',
             'icon' => 'fas fa-fw fa-file',
-            'can' => 'admin.posts.index',
+            'can' => 'admin.posts.create',
         ],
     ],
 
