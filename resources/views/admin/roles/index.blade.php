@@ -6,8 +6,11 @@
 
     <div class="d-flex w-100">
         <h1 class="mr-3">Roles</h1>
-        <a href="{{route('admin.roles.create')}}" class="btn btn-success">Nuevo</a>
+        @can('admin.tags.create')
+            <a href="{{route('admin.roles.create')}}" class="btn btn-success">Nuevo</a>
+        @endcan
     </div>
+    
 @stop
 
 @section('content')
@@ -25,7 +28,9 @@
                     <tr>
                         <th>ID</th>
                         <th>Role</th>
-                        <th colspan="2">Acciones</th>
+                        @canany(['admin.roles.edit','admin.roles.destroy'])
+                            <th colspan="2">Acciones</th>
+                        @endcanany
                     </tr>
                 </thead>
 
@@ -40,15 +45,24 @@
                                 {{$role->name}}
                             </td>
                             <td width="10px">
-                                <a class="btn btn-sm btn-primary" href="{{route('admin.roles.edit',$role)}}">Editar</a>
+
+                                @can('admin.roles.edit')
+                                    <a class="btn btn-sm btn-primary" href="{{route('admin.roles.edit',$role)}}">Editar</a>
+                                @endcan
+
                             </td>
                             <td width="10px">
+
+                                @can('admin.roles.destroy')
+                                    
                                 <form action="{{route('admin.roles.destroy',$role)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
 
                                     <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
                                 </form>
+                                @endcan
+
                             </td>
                         </tr>
                     @endforeach

@@ -7,7 +7,9 @@
 
         <h1 class="mr-3">Posts</h1>
     
-        <a class="btn btn-success" href="{{route('admin.posts.create')}}">Nuevo</a>
+        @can('admin.posts.create')   
+            <a class="btn btn-success" href="{{route('admin.posts.create')}}">Nuevo</a>
+        @endcan
     </div>
 @stop
 
@@ -21,13 +23,4 @@
     
     @livewire('admin.posts-index')
 
-@stop
-
-@section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
-@stop
-
-@section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
 @stop

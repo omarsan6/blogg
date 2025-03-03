@@ -12,7 +12,9 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th colspan="2">Acciones</th>
+                        @canany(['admin.posts.edit','admin.posts.destroy'])
+                            <th colspan="2">Acciones</th>
+                        @endcanany
                     </tr>
                 </thead>
 
@@ -23,16 +25,20 @@
                             <td>{{$post->id}}</td>
                             <td>{{$post->name}}</td>
                             <td width="10px">
-                                <a class="btn btn-primary btn-sm" href="{{route('admin.posts.edit',$post)}}">Editar</a>
+                                @can('admin.posts.edit')
+                                    <a class="btn btn-primary btn-sm" href="{{route('admin.posts.edit',$post)}}">Editar</a>
+                                @endcan
                             </td>
                             <td width="10px">
-                                <form action="{{route('admin.posts.destroy',$post)}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
+                                @can('admin.posts.delete')
+                                    
+                                    <form action="{{route('admin.posts.destroy',$post)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
 
-                                    <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
-
-                                </form>
+                                        <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
