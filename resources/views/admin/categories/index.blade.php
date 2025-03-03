@@ -27,9 +27,9 @@
                 <thead>
                     <th>ID</th>
                     <th>Nombre</th>
-                    @can('admin.categories.create')
+                    @canany(['admin.categories.edit','admin.categories.destroy'])
                         <th colspan="2">Acciones</th>
-                    @endcan
+                    @endcanany
                 </thead>
 
                 <tbody>

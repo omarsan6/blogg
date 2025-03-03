@@ -28,9 +28,9 @@
                     <tr>
                         <th>ID</th>
                         <th>Role</th>
-                        @can('admin.roles.create')
+                        @canany(['admin.roles.edit','admin.roles.destroy'])
                             <th colspan="2">Acciones</th>
-                        @endcan
+                        @endcanany
                     </tr>
                 </thead>
 
