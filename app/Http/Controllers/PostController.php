@@ -5,13 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::where('status',2)->latest('id')->paginate(8);;
+
+        // si por la url está pasando info de la pagina
+        if(request()->page){
+            $key = 'posts'.request()->page; // return posts1,posts2,posts3
+        }else{
+            $key = 'posts';
+        }
+
+        // valida si existe una variable posts en cache
+        if(Cache::has($key)){
+            // si existe devuelve el valor
+            $posts = Cache::get($key);
+        } else{
+            //si n existe hace la peticion a la base de datos
+            $posts = Post::where('status',2)->latest('id')->paginate(8);
+            // almacenar en cache
+            Cache::put($key,$posts);
+        }
 
         return view('posts.index',compact('posts'));
 
