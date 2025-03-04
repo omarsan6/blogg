@@ -1,4 +1,4 @@
-<nav class="bg-gray-800 sticky top-0" x-data="{open:false}">
+<nav class="bg-white shadow sticky top-0" x-data="{open:false}">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -27,8 +27,8 @@
 
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           
-          <a href="/" class="flex shrink-0 items-center">
-            <img class="h-8 w-auto" src="{{asset('img/logo.svg')}}" alt="Your Company">
+          <a href="/" class="flex shrink-0 items-center text-cyan-500 font-bold text-2xl">
+            Blogg
           </a>
 
           <div class="hidden sm:ml-6 sm:block">
@@ -37,7 +37,7 @@
               {{-- <a href="#" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Dashboard</a> --}}
               
               @foreach ($categories as $categorie)
-                <a href="{{route('posts.category',$categorie)}}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                <a href="{{route('posts.category',$categorie)}}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-500 hover:bg-cyan-200 hover:text-slate-500">
                   {{$categorie->name}}
                 </a>
               @endforeach
