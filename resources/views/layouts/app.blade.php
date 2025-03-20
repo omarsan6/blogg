@@ -25,7 +25,7 @@
 
     </head>
 
-    <body class="font-sans antialiased gradient">
+    <body class="font-sans antialiased">
         <x-banner />
 
         <div class="min-h-screen  dark:bg-gray-900">
@@ -56,6 +56,7 @@
           scrollpos = window.scrollY;
   
           if (scrollpos > 10) {
+            header.classList.remove("gradient");
             header.classList.add("bg-white");
             navaction.classList.remove("bg-white");
             navaction.classList.add("gradient");
@@ -71,6 +72,7 @@
             navcontent.classList.add("bg-white");
           } else {
             header.classList.remove("bg-white");
+            header.classList.add("gradient");
             navaction.classList.remove("gradient");
             navaction.classList.add("bg-white");
             navaction.classList.remove("text-white");
