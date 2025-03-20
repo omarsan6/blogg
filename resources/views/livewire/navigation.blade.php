@@ -36,6 +36,8 @@
           </li>
           <li class="mr-3" x-data="{open:false}">
 
+            @auth
+              
             <button x-on:click="open=true" type="button" 
               class="flex items-center justify-between w-full py-2 px-4 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:w-auto">
               Perfil
@@ -50,24 +52,38 @@
               class="z-10 absolute font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-xl w-44 dark:bg-gray-700 dark:divide-gray-600">
               <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" >
                 <li>
-                  <a href="#"
-                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                  <a href="{{route('profile.show')}}"
+                    class="block px-4 py-2 hover:bg-gray-100">Perfil</a>
                 </li>
-                <li>
-                  <a href="#"
-                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                </li>
-                <li>
-                  <a href="#"
-                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                </li>
+                @can('admin.home') 
+                  <li>
+                    <a href="{{route('admin.home')}}"
+                      class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+                  </li>
+                @endcan
               </ul>
               <div class="py-1">
-                <a href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
-                  out</a>
+
+                <form method="POST" action="{{route('logout')}}" x-data>
+                  @csrf
+                  <a href="{{route('logout')}}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
+                    tabindex="-1" id="user-menu-item-2" @click.prevent="$root.submit();">Salir</a>
+                </form>
+
+                {{-- <form method="POST" action="{{route('logout')}}">
+                  @csrf
+                  <a href="{{route('logout')}}"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" @click.prevent="$root.submit();">
+                    Cerrar sesión
+                  </a>
+                </form> --}}
               </div>
             </div>
+
+            @else 
+              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
+              href="{{route('login')}}">Iniciar sesión</a>
+            @endauth
           </li>
 
 

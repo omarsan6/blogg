@@ -19,6 +19,10 @@
 
         margin-top: 3rem;
     }
+
+    .gradient {
+        background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+    }
 }
 
 @media(min-width:640px){
