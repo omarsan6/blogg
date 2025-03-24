@@ -18,11 +18,7 @@
   <!-- Styles -->
   @livewireStyles
 
-  <style>
-    .gradient {
-      background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
-    }
-  </style>
+  
 
 </head>
 
@@ -146,8 +142,8 @@
               toToggle[i].classList.remove("text-white");
             }
             header.classList.add("shadow");
-            navcontent.classList.remove("gradient");
-            navcontent.classList.add("bg-white");
+            // navcontent.classList.remove("text-white");
+            // navcontent.classList.add("text-black");
           } else {
             header.classList.remove("bg-white");
             header.classList.add("gradient");
@@ -162,8 +158,8 @@
             }
   
             header.classList.remove("shadow");
-            navcontent.classList.remove("bg-white");
-            navcontent.classList.add("gradient");
+            // navcontent.classList.remove("text-black");
+            // navcontent.classList.add("text-white");
           }
         });
 </script>

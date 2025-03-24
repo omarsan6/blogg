@@ -21,7 +21,8 @@
     }
 
     .gradient {
-        background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+        background: -webkit-linear-gradient(90deg, #e61eea,#8656e5,#255ec2);
+background: linear-gradient(90deg, #e61eea,#8656e5,#255ec2);
     }
 }
 

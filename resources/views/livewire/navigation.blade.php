@@ -24,14 +24,14 @@
         </button>
       </div>
       <div
-        class="w-full flex-grow h-full lg:flex lg:items-center lg:w-auto hidden p-4 mt-2 lg:mt-0 gradient lg:bg-transparent text-black lg:p-0 z-20"
+        class="w-full flex-grow h-full lg:flex lg:items-center lg:w-auto hidden p-4 mt-2 lg:mt-0 lg:bg-transparent text-black lg:p-0 z-20"
         id="nav-content">
         <ul class="list-reset lg:flex justify-end flex-1 items-center">
           <li class="mr-3">
-            <a class="inline-block py-2 px-4 text-black no-underline" href="#">Servicios</a>
+            <a class="inline-block py-2 px-4 text-slate-950 hover:text-slate-800 no-underline" href="#">Servicios</a>
           </li>
           <li class="mr-3">
-            <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
+            <a class="inline-block text-slate-950 hover:text-slate-800 py-2 px-4"
               href="{{route('posts.index')}}">Blog</a>
           </li>
           <li class="mr-3" x-data="{open:false}">
@@ -39,7 +39,7 @@
             @auth
               
             <button x-on:click="open=true" type="button" 
-              class="flex items-center justify-between w-full py-2 px-4 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:w-auto">
+              class="flex items-center justify-between w-full py-2 px-4 text-slate-950 hover:text-slate-800 rounded-sm md:hover:bg-transparent md:border-0 md:w-auto">
               Perfil
               <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                 viewBox="0 0 10 6">
@@ -69,19 +69,11 @@
                   <a href="{{route('logout')}}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
                     tabindex="-1" id="user-menu-item-2" @click.prevent="$root.submit();">Salir</a>
                 </form>
-
-                {{-- <form method="POST" action="{{route('logout')}}">
-                  @csrf
-                  <a href="{{route('logout')}}"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" @click.prevent="$root.submit();">
-                    Cerrar sesión
-                  </a>
-                </form> --}}
               </div>
             </div>
 
             @else 
-              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
+              <a class="inline-block text-white no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
               href="{{route('login')}}">Iniciar sesión</a>
             @endauth
           </li>
@@ -89,7 +81,7 @@
 
         </ul>
         <button id="navAction"
-          class="mx-auto lg:mx-0 bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+          class="mx-auto lg:mx-0 bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-90 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
           Empezar
         </button>
       </div>
