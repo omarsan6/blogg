@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="containeer">
+    <div class="mt-10 p-7 md:mt-5 md:p-20 bg-white">
 
         @can('published',$post)
         
