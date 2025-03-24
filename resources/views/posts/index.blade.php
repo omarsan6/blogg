@@ -1,7 +1,7 @@
 <x-app-layout>
 
 
-    <div class="containeer">
+    <div class="mt-10 p-7 md:mt-5 md:p-20  bg-white">
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach ($posts as $post)
