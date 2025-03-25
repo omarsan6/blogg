@@ -28,7 +28,7 @@
         id="nav-content">
         <ul class="list-reset lg:flex justify-end flex-1 items-center">
           <li class="mr-3">
-            <a class="inline-block py-2 px-4 text-slate-950 hover:text-slate-800 no-underline" href="#">Servicios</a>
+            <a class="inline-block py-2 px-4 text-slate-950 hover:text-slate-800 no-underline" href="/#services">Servicios</a>
           </li>
           <li class="mr-3">
             <a class="inline-block text-slate-950 hover:text-slate-800 py-2 px-4"
@@ -73,17 +73,17 @@
             </div>
 
             @else 
-              <a class="inline-block text-white no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
+              <a class="inline-block text-slate-950 hover:text-slate-800 py-2 px-4"
               href="{{route('login')}}">Iniciar sesión</a>
             @endauth
           </li>
 
 
         </ul>
-        <button id="navAction"
+        <a href="/#contact" id="navAction"
           class="mx-auto lg:mx-0 bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-90 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
           Empezar
-        </button>
+        </a>
       </div>
     </div>
   </nav>
