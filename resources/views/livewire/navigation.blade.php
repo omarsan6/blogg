@@ -73,7 +73,7 @@
             </div>
 
             @else 
-              <a class="inline-block text-white no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
+              <a class="inline-block text-slate-950 hover:text-slate-800 py-2 px-4"
               href="{{route('login')}}">Iniciar sesión</a>
             @endauth
           </li>
