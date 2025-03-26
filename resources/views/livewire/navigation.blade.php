@@ -1,6 +1,6 @@
 <div class="">
 
-  <nav id="header" class="fixed w-full z-30 top-0 text-white gradient py-2">
+  <nav id="header" class="fixed w-full z-30 top-0 border-b-2 md:border-b-0 text-white gradient py-2">
     <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0">
       <div class="pl-4 flex items-center">
         <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="/">
@@ -39,7 +39,7 @@
             @auth
               
             <button x-on:click="open=true" type="button" 
-              class="flex items-center justify-between w-full py-2 px-4 text-slate-950 hover:text-slate-800 rounded-sm md:hover:bg-transparent md:border-0 md:w-auto">
+              class="flex mb-4 items-center justify-between w-full py-2 px-4 text-slate-950 md:mb-0 hover:text-slate-800 rounded-sm md:hover:bg-transparent md:border-0 md:w-auto">
               Perfil
               <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                 viewBox="0 0 10 6">
@@ -81,12 +81,12 @@
 
         </ul>
         <a href="/#contact" id="navAction"
-          class="mx-auto lg:mx-0 bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-90 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+          class="mx-auto my-4 lg:mx-0 bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-90 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
           Empezar
         </a>
       </div>
     </div>
   </nav>
-  <hr class="border-b mt-2 border-gray-100 opacity-25 my-0 py-0" />
+  
 
 </div>
