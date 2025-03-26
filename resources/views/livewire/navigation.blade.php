@@ -3,14 +3,15 @@
   <nav id="header" class="fixed w-full z-30 top-0 border-b-2 md:border-b-0 text-white gradient py-2">
     <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0">
       <div class="pl-4 flex items-center">
-        <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="/">
+        <a class="toggleColour flex items-center justify-center  text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="/">
           <!--Icon from: http://www.potlabicons.com/ -->
-          <svg class="h-8 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.005 512.005">
+          {{-- <svg class="h-8 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.005 512.005">
             <rect fill="#2a2a31" x="16.539" y="425.626" width="479.767" height="50.502"
               transform="matrix(1,0,0,1,0,0)" />
             <path class="plane-take-off"
               d=" M 510.7 189.151 C 505.271 168.95 484.565 156.956 464.365 162.385 L 330.156 198.367 L 155.924 35.878 L 107.19 49.008 L 211.729 230.183 L 86.232 263.767 L 36.614 224.754 L 0 234.603 L 45.957 314.27 L 65.274 347.727 L 105.802 336.869 L 240.011 300.886 L 349.726 271.469 L 483.935 235.486 C 504.134 230.057 516.129 209.352 510.7 189.151 Z " />
-          </svg>
+          </svg> --}}
+          <img src="{{asset('img/undraw_moonlight_ctir.svg')}}" class="w-20 p-3" alt="">
           LUNA
         </a>
       </div>
@@ -27,6 +28,9 @@
         class="w-full flex-grow h-full lg:flex lg:items-center lg:w-auto hidden p-4 mt-2 lg:mt-0 lg:bg-transparent text-black lg:p-0 z-20"
         id="nav-content">
         <ul class="list-reset lg:flex justify-end flex-1 items-center">
+          <li class="mr-3">
+            <a class="inline-block py-2 px-4 text-slate-950 hover:text-slate-800 no-underline" href="/">Inicio</a>
+          </li>
           <li class="mr-3">
             <a class="inline-block py-2 px-4 text-slate-950 hover:text-slate-800 no-underline" href="/#services">Servicios</a>
           </li>
@@ -73,7 +77,7 @@
             </div>
 
             @else 
-              <a class="inline-block text-slate-950 hover:text-slate-800 py-2 px-4"
+              <a class="inline-block mb-4 text-slate-950 hover:text-slate-800 md:mb-0 py-2 px-4"
               href="{{route('login')}}">Iniciar sesión</a>
             @endauth
           </li>
